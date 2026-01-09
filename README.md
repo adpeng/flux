@@ -84,7 +84,7 @@ Flux 在不同平台上采用了最原生的系统级方案来接管网络流量
 *   **VLESS**: 支持 `TCP`, `WS`, `TLS`, `REALITY`, `gRPC` 等多种传输组合。
 *   **VMess**: 经典协议支持，兼容 `TCP`, `WS`, `TLS`, `Auto` 安全模式。
 *   **Trojan**: 完整的 Trojan 协议支持，包括 `Trojan-Go` 特性兼容。
-*   **Shadowsocks**: 支持标准 SS 协议，包括常见的加密方式 (aes-128-gcm, aes-256-gcm, chacha20-ietf-poly1305)。
+*   **Shadowsocks**: 支持标准 SS 协议 (AEAD Ciphers)。
 
 ---
 
