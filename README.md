@@ -20,17 +20,19 @@
 
 ## 📱 界面预览
 
-| 登录 & 注册 | 首页连接 | 状态页 |
-| :---: | :---: | :---: |
-| <img src="assets/images/screenshots/1.png" width="200"> | <img src="assets/images/screenshots/5.png" width="200"> | <img src="assets/images/screenshots/4.png" width="200"> |
+### 📱 App 版本
 
-| 账号/侧边 | 购买套餐 | 更多页面 |
+| | | |
 | :---: | :---: | :---: |
-| <img src="assets/images/screenshots/3.png" width="200"> | <img src="assets/images/screenshots/2.png" width="200"> | <img src="assets/images/screenshots/6.png" width="200"> |
+| <img src="assets/images/screenshots/1.png" width="200"> | <img src="assets/images/screenshots/2.png" width="200"> | <img src="assets/images/screenshots/3.png" width="200"> |
+| <img src="assets/images/screenshots/4.png" width="200"> | <img src="assets/images/screenshots/5.png" width="200"> | |
 
-| 更多细节 | | |
-| :---: | :---: | :---: |
-| <img src="assets/images/screenshots/7.png" width="200"> | <img src="assets/images/screenshots/8.png" width="200"> | <img src="assets/images/screenshots/9.png" width="200"> |
+### 💻 桌面版本
+
+| | |
+| :---: | :---: |
+| <img src="assets/images/screenshots/6.png" width="200"> | <img src="assets/images/screenshots/7.png" width="200"> |
+| <img src="assets/images/screenshots/8.png" width="200"> | <img src="assets/images/screenshots/9.png" width="200"> |
 
 ---
 
