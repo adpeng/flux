@@ -95,6 +95,29 @@ class ServerNode {
           network: config['network'] as String? ?? 'tcp',
           rawConfig: config,
         );
+      case 'ss':
+         return ServerNode(
+           name: name,
+           address: server,
+           port: port,
+           protocol: 'shadowsocks',
+           uuid: config['password'] as String?,
+           security: config['cipher'] as String?,
+           rawConfig: config,
+         );
+      case 'hysteria2':
+         return ServerNode(
+           name: name,
+           address: server,
+           port: port,
+           protocol: 'hysteria2',
+           uuid: config['password'] as String?,
+           network: 'udp',
+           rawConfig: {
+             ...config,
+             'sni': config['sni'] ?? config['peer'],
+           },
+         );
       default:
         // 不支持的协议类型
         return ServerNode(
@@ -421,6 +444,56 @@ class ServerNode {
         }
       }
 
+      outbound['streamSettings'] = streamSettings;
+      return outbound;
+    } else if (protocol == 'shadowsocks') {
+      // Shadowsocks 协议配置
+      final outbound = <String, dynamic>{
+        'protocol': 'shadowsocks',
+        'settings': {
+          'servers': [
+            {
+              'address': address,
+              'port': port,
+              'password': uuid ?? '',
+              'method': security ?? 'aes-128-gcm',
+              'uot': true,
+            }
+          ]
+        },
+      };
+      return outbound;
+    } else if (protocol == 'hysteria2') {
+      // Hysteria2 协议配置
+      final outbound = <String, dynamic>{
+        'protocol': 'hysteria2',
+        'settings': {
+          'servers': [
+            {
+              'address': address,
+              'port': port,
+              'auth': uuid ?? '',
+            }
+          ]
+        },
+      };
+
+      final streamSettings = <String, dynamic>{
+        'network': 'udp',
+        'security': 'tls',
+      };
+      
+      final sni = rawConfig?['sni'] as String?;
+      final skipCertVerify = rawConfig?['skip-cert-verify'] == true ||
+          rawConfig?['allowInsecure'] == true;
+          
+      if (sni != null || skipCertVerify) {
+        streamSettings['tlsSettings'] = <String, dynamic>{
+          if (sni != null) 'serverName': sni,
+          if (skipCertVerify) 'allowInsecure': true,
+        };
+      }
+      
       outbound['streamSettings'] = streamSettings;
       return outbound;
     }
