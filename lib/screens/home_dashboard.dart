@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
-import '../widgets/fade_in_widget.dart';
 
 class HomeDashboard extends StatefulWidget {
   final VoidCallback onConnectPressed;
@@ -21,8 +20,6 @@ class HomeDashboard extends StatefulWidget {
 }
 
 class _HomeDashboardState extends State<HomeDashboard> {
-  // Removed AnimationControllers
-
   @override
   Widget build(BuildContext context) {
     final isBusy = widget.isConnecting;
@@ -33,38 +30,47 @@ class _HomeDashboardState extends State<HomeDashboard> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Connection Button Container
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                // Simple static decoration
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
+            // Simplified Button (Flat Style)
+            GestureDetector(
+              onTap: isBusy ? null : widget.onConnectPressed,
+              child: Container(
+                width: 140,
+                height: 140,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: widget.isConnected 
+                      ? Colors.green.withOpacity(0.1) 
+                      : AppColors.surface,
+                  border: Border.all(
+                    color: widget.isConnected 
+                        ? Colors.green 
+                        : (isBusy ? AppColors.accent : AppColors.border),
+                    width: isBusy ? 2 : 4,
                   ),
-                ],
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.power_settings_new_rounded,
+                  size: 64,
+                  color: widget.isConnected 
+                      ? Colors.green 
+                      : (isBusy ? AppColors.accent : AppColors.textSecondary),
+                ),
               ),
-              child: _buildHeroButton(),
             ),
             const SizedBox(height: 24),
-            // Status Text - Simple switch
             Text(
               widget.statusMessage,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: isBusy ? AppColors.accent : AppColors.textPrimary,
+                    color: widget.isConnected ? Colors.green : AppColors.textSecondary,
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 48),
 
-            // Services Grid
-            const SizedBox(height: 40),
+            // Simplified Grid
             _buildFeatureRow(context),
           ],
         ),
@@ -73,115 +79,48 @@ class _HomeDashboardState extends State<HomeDashboard> {
   }
 
   Widget _buildFeatureRow(BuildContext context) {
-    // Responsive grid
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isDesktop = constraints.maxWidth > 600;
-        final crossAxisCount = isDesktop ? 4 : 2;
-        final childAspectRatio = isDesktop ? 2.5 : 2.8;
-
+        final crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
         return GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: crossAxisCount,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: childAspectRatio,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+          childAspectRatio: 2.5,
           children: [
-            _buildFeatureTile(Icons.hub_rounded, 'IXP 接入', '极速分流'),
-            _buildFeatureTile(Icons.speed_rounded, '高速稳定', '4K 秒开'),
-            _buildFeatureTile(Icons.security_rounded, '安全日志', '隐私保护'),
-            _buildFeatureTile(Icons.lock_rounded, '强力加密', 'AES-256'),
+            _buildFeatureTile(Icons.security, '安全加密'),
+            _buildFeatureTile(Icons.speed, '极速连接'),
+            _buildFeatureTile(Icons.lock_outline, '隐私保护'),
+            _buildFeatureTile(Icons.public, '全球节点'),
           ],
         );
       },
     );
   }
 
-  Widget _buildFeatureTile(IconData icon, String title, String subtitle) {
+  Widget _buildFeatureTile(IconData icon, String title) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.border,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.border),
       ),
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 18, color: AppColors.textSecondary),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    color: AppColors.textSecondary,
-                    fontSize: 10,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+          Icon(icon, size: 20, color: AppColors.textSecondary),
+          const SizedBox(height: 4),
+          Text(
+            title,
+            style: const TextStyle(
+              color: AppColors.textSecondary,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildHeroButton() {
-    final isBusy = widget.isConnecting;
-    final label = widget.isConnected ? '断开' : (isBusy ? '连接中' : '连接');
-    final icon = widget.isConnected ? Icons.power : Icons.power_settings_new;
-
-    return GestureDetector(
-      onTap: isBusy ? null : widget.onConnectPressed,
-      child: Container(
-        width: 200,
-        height: 60,
-        decoration: BoxDecoration(
-          color: widget.isConnected ? AppColors.surface : AppColors.accent,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-             color: widget.isConnected ? AppColors.border : Colors.transparent,
-          )
-        ),
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: widget.isConnected ? AppColors.textPrimary : Colors.white,
-              size: 20,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              label,
-              style: TextStyle(
-                color: widget.isConnected ? AppColors.textPrimary : Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

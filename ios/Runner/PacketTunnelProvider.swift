@@ -17,7 +17,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
               let providerConfig = conf.providerConfiguration,
               let configStr = providerConfig["config"] as? String else {
             NSLog("[Flux] Missing VPN configuration")
-            completionHandler(NSError(domain: "com.flux.app", code: 1, userInfo: [NSLocalizedDescriptionKey: "Missing config"]))
+            completionHandler(NSError(domain: "com.example.yourapp", code: 1, userInfo: [NSLocalizedDescriptionKey: "Missing config"]))
             return
         }
         

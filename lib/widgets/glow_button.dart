@@ -24,16 +24,7 @@ class GlowButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          gradient: const LinearGradient(
-            colors: [AppColors.accent, AppColors.accentSoft],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.accent.withValues(alpha: 0.35),
-              blurRadius: 18,
-              offset: const Offset(0, 10),
-            ),
-          ],
+          color: AppColors.accent,
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(

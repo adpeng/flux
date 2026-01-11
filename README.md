@@ -77,25 +77,33 @@ Flux 在不同平台上采用了最原生的系统级方案来接管网络流量
     3.  所有浏览器和支持系统代理的应用流量会自动流向内核。
 *   **优势**: 兼容性好，不干扰系统底层驱动。
 
-### 3. 协议支持 (Supported Protocols)
+### 🛠 支持协议 / Supported Protocols
 
-得益于 Xray Core 的强大能力，Flux 支持当今主流的抗审查协议：
+✅ **已验证平台 (Verified on Android & Windows)**:
+- **Hysteria2**: [https://v2.hysteria.network/](https://v2.hysteria.network/) (极速抗封锁协议)
+- **VLESS** (Vision / Reality)
+- **VMess** (TCP / WebSocket)
+- **Trojan**
+- **Shadowsocks** (AEAD)
 
-*   **VLESS**: 支持 `TCP`, `WS`, `TLS`, `REALITY`, `gRPC` 等多种传输组合。
-*   **VMess**: 经典协议支持，兼容 `TCP`, `WS`, `TLS`, `Auto` 安全模式。
-*   **Trojan**: 完整的 Trojan 协议支持，包括 `Trojan-Go` 特性兼容。
-*   **Shadowsocks**: 支持标准 SS 协议 (AEAD Ciphers)。
+⚠️ **注意 / Note**: 
+开发者暂无 Apple 设备，**iOS 和 macOS 版本尚未经过完整测试**。欢迎社区贡献测试反馈！
+(Developer has no Apple devices to test iOS/macOS builds. Contributions welcome!)
 
 ---
 
-## 🚀 快速上手指南
+### 💬 加入社区 / Community
 
-只需三步，您就能拥有自己的客户端！
+- **Telegram Group**: [https://t.me/+62Otr015kSs1YmNk](https://t.me/+62Otr015kSs1YmNk)
+
+---
+
+### 🚀 快速开始 / Quick Start
 
 ### 1. 下载代码
 
 ```bash
-git clone https://github.com/flux-apphub/flux.git
+git clone https://github.com/your-username/flux.git
 cd flux
 ```
 
@@ -176,9 +184,9 @@ Future<String> getBaseUrl() async {
 
 如果这个项目对您有帮助，欢迎请作者喝杯咖啡，支持开源开发！
 
-| BNB Chain | Arbitrum | Ethereum | TRC20 (USDT) |
+| USDT (TRC20) | USDC (Arbitrum) | ETH (Arbitrum) | USDT (ERC20) |
 | :---: | :---: | :---: | :---: |
-| <img src="assets/images/donation/bnb.png" width="200" alt="BNB"> | <img src="assets/images/donation/arbitrum.png" width="200" alt="Arbitrum"> | <img src="assets/images/donation/eth.png" width="200" alt="Ethereum"> | <img src="assets/images/donation/trc20.png" width="200" alt="TRC20"> |
+| <img src="assets/images/donation/usdt_trc20.png" width="180" alt="USDT TRC20"> | <img src="assets/images/donation/usdc_arbitrum.png" width="180" alt="USDC Arbitrum"> | <img src="assets/images/donation/eth_arbitrum.png" width="180" alt="ETH Arbitrum"> | <img src="assets/images/donation/usdt_erc20.png" width="180" alt="USDT ERC20"> |
 
 ---
 

@@ -19,8 +19,8 @@ import java.io.File
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : FlutterActivity() {
-    private val CHANNEL = "com.flux.app/v2ray"
-    private val STATUS_CHANNEL = "com.flux.app/v2ray_status"
+    private val CHANNEL = "com.example.yourapp/v2ray"
+    private val STATUS_CHANNEL = "com.example.yourapp/v2ray_status"
     private var isV2rayRunning = false
     private var coreController: CoreController? = null
     private var isInitialized = false
